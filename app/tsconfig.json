@@ -6,7 +6,7 @@
     //"commonjs" means the default resolution strategy is node
     "module": "commonjs",
     "moduleResolution": "node",
-    "traceResolution": true,
+    // "traceResolution": true,
     // "baseUrl": "./modules",
     // "paths": {
     //   "my_lib": ["./customPath"]
