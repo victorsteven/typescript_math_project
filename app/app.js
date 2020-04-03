@@ -11,16 +11,7 @@ function logPlayer(name) {
     if (name === void 0) { name = 'MultiMath Player'; }
     console.log("the name is " + name);
 }
-function getInputValue(elementID) {
-    //asserting that document.getElementById(elementID) is of type HTMLInputElement
-    var inputElement = document.getElementById(elementID);
-    if (inputElement.value === '') {
-        return undefined;
-    }
-    else {
-        return inputElement.value;
-    }
-}
+
 function postScore(score, playerName) {
     if (playerName === void 0) { playerName = 'Tony Brown'; }
     //logger is of type function and the return value of the function is void
