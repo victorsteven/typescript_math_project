@@ -15,6 +15,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var enum_1 = require("./enum");
 var classes_1 = require("./classes");
+var utility_1 = require("./utility");
 var classes_2 = require("./classes");
 function PrintHelo() {
     console.log("the hello");
@@ -141,4 +142,21 @@ var Newspaper = (function (_super) {
 }(classes_1.ReferenceItem));
 var myPaper = new Newspaper('The paper', 190);
 myPaper.printCitation();
+function LogAndReturn(thing) {
+    return thing;
+}
+var someString = LogAndReturn('hello this is the generic');
+console.log(someString);
+var newMag = { title: "this is the title" };
+var someMag = LogAndReturn(newMag);
+console.log(someMag);
+var inventory = [
+    { id: 1, title: 'Book1', author: 'Steven Mark', available: true, category: enum_1.Category.Biology },
+    { id: 2, title: 'Book2', author: 'Grandy', available: true, category: enum_1.Category.Biology },
+    { id: 3, title: 'Book3', author: 'Mensa', available: false, category: enum_1.Category.Biology }
+];
+var purgedBooks = utility_1.Purge(inventory);
+purgedBooks.forEach(function (book) { return console.log("The title: ", book.title); });
+var purgedNums = utility_1.Purge([1, 2, 3, 4, 5]);
+purgedNums.forEach(function (num) { return console.log("the num: ", num); });
 //# sourceMappingURL=app.js.map

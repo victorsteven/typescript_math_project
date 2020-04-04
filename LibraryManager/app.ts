@@ -2,6 +2,8 @@ import { Category } from './enum'
 import { Book, DamageLogger, Author, Librarian } from './interfaces'
 import { ReferenceItem, Encyclopedia } from './classes'
 
+import { Purge } from './utility'
+
 import { UniversityLib } from './classes'
 
 function PrintHelo(): void {
@@ -169,3 +171,34 @@ let Newspaper = class extends ReferenceItem {
 
 let myPaper = new Newspaper('The paper', 190)
 myPaper.printCitation();
+
+function LogAndReturn<T>(thing: T): T {
+  return thing
+}
+
+let someString: string = LogAndReturn<string>('hello this is the generic')
+
+console.log(someString)
+
+interface Magazine {
+  title: string 
+}
+
+let newMag: Magazine = { title: "this is the title"}
+let someMag: Magazine = LogAndReturn<Magazine>(newMag)
+
+console.log(someMag)
+
+
+let inventory: Array<Book> = [
+    { id: 1, title: 'Book1', author: 'Steven Mark', available: true, category: Category.Biology},
+    { id: 2, title: 'Book2', author: 'Grandy', available: true, category: Category.Biology},
+    { id: 3, title: 'Book3', author: 'Mensa', available: false, category: Category.Biology }
+]
+
+let purgedBooks: Array<Book>  = Purge<Book>(inventory)
+purgedBooks.forEach(book => console.log("The title: ", book.title))
+
+
+let purgedNums: Array<number> = Purge<number>([1,2,3,4,5])
+purgedNums.forEach(num => console.log("the num: ", num))
