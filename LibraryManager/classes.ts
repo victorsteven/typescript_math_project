@@ -1,6 +1,36 @@
 import { Book, DamageLogger, Author, Librarian } from './interfaces'
 
-export class UniversityLib implements Librarian {
+export const CLASS_INFO = Symbol()
+
+export class UniversityLib implements Librarian, Employee, Researcher {
+
+  name: string
+  email: string
+  department: string
+
+  [CLASS_INFO](): void {
+    console.log('this class represents a UniversityLib')
+  }
+
+  static [Symbol.hasInstance](obj: Object) {
+    return obj.hasOwnProperty('name') && obj.hasOwnProperty('assistCustomer')
+  }
+
+  assistCustomer(name: string) {
+    console.log("this is the person name: " + name)
+  }
+  assistFaculty(custName: string) {
+    console.log('Assisting faculty')
+  }
+
+  // implementation of the following to be provided by the mixing function
+  title: string
+  addToSchedule: () => void
+  logTitle: () => void
+  doResearch: (topic: string) => void
+}
+
+export class PublicLibrarian implements Librarian {
 
   name: string
   email: string
@@ -8,6 +38,9 @@ export class UniversityLib implements Librarian {
 
   assistCustomer(name: string) {
     console.log("this is the person name: " + name)
+  }
+  teachCommunity() {
+    console.log('Assisting community')
   }
 }
 
@@ -45,3 +78,21 @@ export class Encyclopedia extends ReferenceItem {
     console.log(`details: ${this.title} and the year: ${this.year}`)
   }
 }
+
+class Employee {
+  title: string 
+  addToSchedule(): void {
+    console.log('Employee added to schedule')
+  }
+  logTitle(): void {
+    console.log(`Employee has the title ${this.title}`)
+  }
+}
+
+class Researcher {
+  doResearch(topic: string): void {
+    console.log(`Doing research on ${topic}`)
+  }
+}
+
+export { Employee, Researcher }

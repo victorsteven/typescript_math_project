@@ -7,7 +7,17 @@ interface Book {
   available: boolean;
   category: Category;
   markDamage?: DamageLogger
-  markReturn?: (reason: string) => void 
+  // markReturn?: (reason: string) => void    or
+  markReturn?(reason: string): void 
+}
+interface Country {
+  name: string
+  continent: boolean
+}
+//this book can be merged with the one above
+interface Country {
+  gmt: string
+  timezone: string
 }
 
 interface DamageLogger {
@@ -28,4 +38,9 @@ interface Librarian extends Person {
   assistCustomer: (custName: string) => void
 }
 
-export { Book, DamageLogger, Author, Librarian }
+interface Magazine {
+  title: string 
+  publisher: string
+}
+
+export { Book, DamageLogger, Author, Librarian, Magazine, Country }
