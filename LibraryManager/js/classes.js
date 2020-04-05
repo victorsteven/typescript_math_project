@@ -1,72 +1,108 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CLASS_INFO = Symbol();
-class UniversityLib {
-    [exports.CLASS_INFO]() {
-        console.log('this class represents a UniversityLib');
+var decorator_1 = require("./decorator");
+var UniversityLib = (function () {
+    function UniversityLib() {
     }
-    static [Symbol.hasInstance](obj) {
-        return obj.hasOwnProperty('name') && obj.hasOwnProperty('assistCustomer');
-    }
-    assistCustomer(name) {
+    UniversityLib.prototype.assistCustomer = function (name) {
         console.log("this is the person name: " + name);
-    }
-    assistFaculty(custName) {
+    };
+    UniversityLib.prototype.assistFaculty = function (custName) {
         console.log('Assisting faculty');
-    }
-}
+    };
+    UniversityLib = __decorate([
+        decorator_1.sealed('HelloString')
+    ], UniversityLib);
+    return UniversityLib;
+}());
 exports.UniversityLib = UniversityLib;
-class PublicLibrarian {
-    assistCustomer(name) {
+var PublicLibrarian = (function () {
+    function PublicLibrarian() {
+    }
+    PublicLibrarian.prototype.assistCustomer = function (name) {
         console.log("this is the person name: " + name);
-    }
-    teachCommunity() {
+    };
+    PublicLibrarian.prototype.teachCommunity = function () {
         console.log('Assisting community');
-    }
-}
+    };
+    return PublicLibrarian;
+}());
 exports.PublicLibrarian = PublicLibrarian;
-class ReferenceItem {
-    constructor(title, year) {
+var ReferenceItem = (function () {
+    function ReferenceItem(title, year) {
         this.title = title;
         this.year = year;
         console.log('Creating a new ReferenceItem..');
     }
-    printItem() {
-        console.log(`${this.title} was published in ${this.year}`);
-        console.log(`Department: ${ReferenceItem.department}`);
-    }
-    get publisher() {
-        return this._publisher.toUpperCase();
-    }
-    set publisher(newPublisher) {
-        this._publisher = newPublisher;
-    }
-}
+    ReferenceItem.prototype.printItem = function () {
+        console.log(this.title + " was published in " + this.year);
+        console.log("Department: " + ReferenceItem.department);
+    };
+    Object.defineProperty(ReferenceItem.prototype, "publisher", {
+        get: function () {
+            return this._publisher.toUpperCase();
+        },
+        set: function (newPublisher) {
+            this._publisher = newPublisher;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ReferenceItem.department = 'Research';
+    return ReferenceItem;
+}());
 exports.ReferenceItem = ReferenceItem;
-ReferenceItem.department = 'Research';
-class Encyclopedia extends ReferenceItem {
-    constructor(newTitle, newYear, pages) {
-        super(newTitle, newYear);
-        this.pages = pages;
+var Encyclopedia = (function (_super) {
+    __extends(Encyclopedia, _super);
+    function Encyclopedia(newTitle, newYear, pages) {
+        var _this = _super.call(this, newTitle, newYear) || this;
+        _this.pages = pages;
+        return _this;
     }
-    printCitation() {
-        console.log(`details: ${this.title} and the year: ${this.year}`);
-    }
-}
+    Encyclopedia.prototype.printCitation = function () {
+        console.log("details: " + this.title + " and the year: " + this.year);
+    };
+    return Encyclopedia;
+}(ReferenceItem));
 exports.Encyclopedia = Encyclopedia;
-class Employee {
-    addToSchedule() {
+var Employee = (function () {
+    function Employee() {
+    }
+    Employee.prototype.addToSchedule = function () {
         console.log('Employee added to schedule');
-    }
-    logTitle() {
-        console.log(`Employee has the title ${this.title}`);
-    }
-}
+    };
+    Employee.prototype.logTitle = function () {
+        console.log("Employee has the title " + this.title);
+    };
+    return Employee;
+}());
 exports.Employee = Employee;
-class Researcher {
-    doResearch(topic) {
-        console.log(`Doing research on ${topic}`);
+var Researcher = (function () {
+    function Researcher() {
     }
-}
+    Researcher.prototype.doResearch = function (topic) {
+        console.log("Doing research on " + topic);
+    };
+    return Researcher;
+}());
 exports.Researcher = Researcher;
 //# sourceMappingURL=classes.js.map

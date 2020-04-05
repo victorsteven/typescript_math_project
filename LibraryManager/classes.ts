@@ -1,24 +1,26 @@
 import { Book, DamageLogger, Author, Librarian } from './interfaces'
+import { sealed } from './decorator'
 
-export const CLASS_INFO = Symbol()
+// export const CLASS_INFO = Symbol()
 
+@sealed('HelloString')
 export class UniversityLib implements Librarian, Employee, Researcher {
 
   name: string
   email: string
   department: string
 
-  [CLASS_INFO](): void {
-    console.log('this class represents a UniversityLib')
-  }
+  // [CLASS_INFO](): void {
+  //   console.log('this class represents a UniversityLib')
+  // }
 
-  static [Symbol.hasInstance](obj: Object) {
-    return obj.hasOwnProperty('name') && obj.hasOwnProperty('assistCustomer')
-  }
+  // static [Symbol.hasInstance](obj: Object) {
+  //   return obj.hasOwnProperty('name') && obj.hasOwnProperty('assistCustomer')
+  // }
 
   assistCustomer(name: string) {
     console.log("this is the person name: " + name)
-  }
+  } 
   assistFaculty(custName: string) {
     console.log('Assisting faculty')
   }

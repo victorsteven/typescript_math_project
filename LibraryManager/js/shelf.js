@@ -1,21 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class Shelf {
-    constructor() {
+var Shelf = (function () {
+    function Shelf() {
         this._items = new Array();
     }
-    add(item) {
+    Shelf.prototype.add = function (item) {
         this._items.push(item);
-    }
-    getFirst() {
+    };
+    Shelf.prototype.getFirst = function () {
         return this._items[0];
-    }
-    find(title) {
-        return this._items.filter(item => item.title === title)[0];
-    }
-    printTitles() {
-        this._items.forEach(item => console.log(item.title));
-    }
-}
+    };
+    Shelf.prototype.find = function (title) {
+        return this._items.filter(function (item) { return item.title === title; })[0];
+    };
+    Shelf.prototype.printTitles = function () {
+        this._items.forEach(function (item) { return console.log(item.title); });
+    };
+    return Shelf;
+}());
 exports.default = Shelf;
 //# sourceMappingURL=shelf.js.map

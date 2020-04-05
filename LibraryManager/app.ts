@@ -1,7 +1,8 @@
 import { Category } from './enum'
 import { Book, DamageLogger, Author, Librarian, Magazine, Country } from './interfaces'
-import { CLASS_INFO, ReferenceItem, Encyclopedia, Employee, Researcher, PublicLibrarian } from './classes'
-import './LibrarianExtension'
+// import { CLASS_INFO, ReferenceItem, Encyclopedia, Employee, Researcher, PublicLibrarian } from './classes'
+import {  ReferenceItem, Encyclopedia, Employee, Researcher, PublicLibrarian } from './classes'
+// import './LibrarianExtension'
 
 import { Purge } from './utility'
 import Shelf from './shelf'
@@ -406,9 +407,9 @@ ebook.Checkin()
 // let mergedCountry: Country
 // mergedCountry.timezone = 'Western timezone'
 
-let newLib = new UniversityLib()
-newLib.phone = '444-333'
-newLib.hostSeminar('Bristish Lecture') 
+// let newLib = new UniversityLib()
+// newLib.phone = '444-333'
+// newLib.hostSeminar('Bristish Lecture') 
 
 interface Vehicle {
   numberOfWheels: number
@@ -444,11 +445,11 @@ if(isBook(readingMat)) {
 
 // let mySymbol = Symbol('first_symbol');
 
-let sym1 = Symbol("first_symbol");
-let sym2 = Symbol("second_symbol");
+// let sym1 = Symbol("first_symbol");
+// let sym2 = Symbol("second_symbol");
 
-console.log(sym1 === sym2)
-console.log(typeof sym2)
+// console.log(sym1 === sym2)
+// console.log(typeof sym2)
 
 // let myObject = {
 //   [sym2]: 'value for the symbol key'
@@ -456,9 +457,9 @@ console.log(typeof sym2)
 // console.log(myObject[sym2])
  
 
-let libr = new UniversityLib()
+// let libr = new UniversityLib()
 //calling the symbol computed property
-libr[CLASS_INFO]()
+// libr[CLASS_INFO]()
 
 
 let libraryCustomer = {
@@ -471,3 +472,5 @@ if (libraryCustomer instanceof UniversityLib) {
 } else {
   console.log('Not a librarian')
 }
+
+let lib1 = new UniversityLib();
