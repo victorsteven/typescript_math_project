@@ -482,3 +482,95 @@ try {
 } catch(error) {
   console.log("the error: ", error)
 }
+
+//Using Callback
+interface LibMgrCallback {
+  (err: ErrCase, titles: ResultCase): void
+}
+type ErrCase = Error | null
+type ResultCase = string[] | null
+
+function getBooksByCategory(cat: Category, callback: LibMgrCallback): void {
+  setTimeout(() => {
+    try {
+      let foundBooks: string[] = GetBookTitlesByCategory(cat)
+      if (foundBooks.length > 0) {
+        callback(null, foundBooks)
+      } else {
+        throw new Error('no books found')
+      }
+    } catch(error) {
+      callback(error, null)
+    }
+  }, 2000)
+}
+
+function logCategorySearch(err: ErrCase, titles: ResultCase): void {
+  if(err) {
+    console.log(`Error message: ${err.message}`)
+  } else {
+    console.log(`Found the following titles: ${titles}`)
+  }
+}
+console.log('Beginning search...')
+getBooksByCategory(Category.Biology, logCategorySearch)
+console.log('Search submitted...')
+
+
+//Using Promised
+function getBooksByCategory2(cat: Category): Promise<string[]> {
+  
+  let ans: Promise<string[]> = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        let foundBooks: string[] = GetBookTitlesByCategory(cat)
+        if (foundBooks.length > 0) {
+          resolve(foundBooks)
+        } else {
+          throw new Error('no books found')
+        }
+      } catch(error) {
+        reject(error)
+      }
+    }, 2000)
+  })
+  return ans
+}
+console.log('Beginning search 2...')
+// getBooksByCategory2(Category.Fiction).then(results => {
+//   console.log(results)
+// }).catch(err => {
+//   console.log(err)
+// })
+
+//chaining then:
+getBooksByCategory2(Category.Biology).then(results => {
+  return results //this is essential
+}).then(results => console.log(results.length))
+.catch(err => {
+  console.log(err)
+})
+console.log('Search submitted 2...')
+
+
+
+//Using async/await
+async function getBooksByCategory3(cat: Category) {
+      try {
+        let foundBooks: string[] = await GetBookTitlesByCategory(cat)
+        if (foundBooks.length > 0) {
+          return foundBooks
+        } else {
+          throw new Error('no books found')
+        }
+      } catch(error) {
+        return error
+      }
+    // return foundBooks
+
+}
+console.log('Beginning search 3...') 
+getBooksByCategory3(Category.Biology).then(ans => {
+  console.log('third ans: ', ans)
+}).catch(err => console.log('third error: ', err))
+console.log('Search submitted 3...')

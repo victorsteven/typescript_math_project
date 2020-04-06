@@ -1,30 +1,26 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var enum_1 = require("./enum");
-var classes_1 = require("./classes");
-var shelf_1 = __importDefault(require("./shelf"));
-var classes_2 = require("./classes");
+const enum_1 = require("./enum");
+const classes_1 = require("./classes");
+const shelf_1 = __importDefault(require("./shelf"));
+const classes_2 = require("./classes");
 function PrintHelo() {
     console.log("the hello");
 }
 function GetAllBooks() {
-    var books = [
+    let books = [
         { id: 1, title: 'Book1', author: 'Steven Mark', available: true, category: enum_1.Category.Biology },
         { id: 2, title: 'Book2', author: 'Grandy', available: true, category: enum_1.Category.Biology },
         { id: 3, title: 'Book3', author: 'Mensa', available: false, category: enum_1.Category.Biology }
@@ -32,17 +28,16 @@ function GetAllBooks() {
     return books;
 }
 function GetAllMagazines() {
-    var mags = [
+    let mags = [
         { title: 'Mag 1', author: 'Steven Mark', publisher: 'Rufus and Bee' },
         { title: 'Mag 2', author: 'Grandy', publisher: 'Rufus and Bee' },
     ];
     return mags;
 }
 function logFirstAvailable(books) {
-    var numberOfBooks = books.length;
-    var firstAvailable = '';
-    for (var _i = 0, books_1 = books; _i < books_1.length; _i++) {
-        var currentBook = books_1[_i];
+    let numberOfBooks = books.length;
+    let firstAvailable = '';
+    for (let currentBook of books) {
         if (currentBook.available) {
             firstAvailable = currentBook.title;
             break;
@@ -54,10 +49,9 @@ function logFirstAvailable(books) {
 function GetBookTitlesByCategory(categoryFilter) {
     console.log('Getting books in category: ', categoryFilter);
     console.log('Getting books in category: ', enum_1.Category[categoryFilter]);
-    var allBooks = GetAllBooks();
-    var filteredTitles = [];
-    for (var _i = 0, allBooks_1 = allBooks; _i < allBooks_1.length; _i++) {
-        var currentBook = allBooks_1[_i];
+    const allBooks = GetAllBooks();
+    const filteredTitles = [];
+    for (let currentBook of allBooks) {
         if (currentBook.category === categoryFilter) {
             filteredTitles.push(currentBook.title);
         }
@@ -65,32 +59,26 @@ function GetBookTitlesByCategory(categoryFilter) {
     return filteredTitles;
 }
 function LogBookTitles(titles) {
-    for (var _i = 0, titles_1 = titles; _i < titles_1.length; _i++) {
-        var title = titles_1[_i];
+    for (let title of titles) {
         console.log(title);
     }
 }
 function GetBookByID(id) {
-    var allBooks = GetAllBooks();
-    return allBooks.filter(function (book) { return book.id === id; })[0];
+    const allBooks = GetAllBooks();
+    return allBooks.filter(book => book.id === id)[0];
 }
 function CreateCustomerID(name, id) {
-    var mine = name + id;
+    let mine = name + id;
     return mine;
 }
-var IdGenerator;
+let IdGenerator;
 IdGenerator = CreateCustomerID;
-var ans = IdGenerator('Mike', 13);
+let ans = IdGenerator('Mike', 13);
 console.log("the ans: ", ans);
-function CheckoutBooks(customer) {
-    var bookIDs = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        bookIDs[_i - 1] = arguments[_i];
-    }
-    var booksCheckedOut = [];
-    for (var _a = 0, bookIDs_1 = bookIDs; _a < bookIDs_1.length; _a++) {
-        var id = bookIDs_1[_a];
-        var book = GetBookByID(id);
+function CheckoutBooks(customer, ...bookIDs) {
+    let booksCheckedOut = [];
+    for (let id of bookIDs) {
+        let book = GetBookByID(id);
         if (book.available) {
             booksCheckedOut.push(book.title);
         }
@@ -98,19 +86,17 @@ function CheckoutBooks(customer) {
     return booksCheckedOut;
 }
 function GetTitles(bookProperty) {
-    var allBooks = GetAllBooks();
-    var foundTitles = [];
+    const allBooks = GetAllBooks();
+    const foundTitles = [];
     if (typeof bookProperty == 'string') {
-        for (var _i = 0, allBooks_2 = allBooks; _i < allBooks_2.length; _i++) {
-            var book = allBooks_2[_i];
+        for (let book of allBooks) {
             if (book.author === bookProperty) {
                 foundTitles.push(book.title);
             }
         }
     }
     if (typeof bookProperty == 'boolean') {
-        for (var _a = 0, allBooks_3 = allBooks; _a < allBooks_3.length; _a++) {
-            var book = allBooks_3[_a];
+        for (let book of allBooks) {
             if (book.available === bookProperty) {
                 foundTitles.push(book.title);
             }
@@ -118,109 +104,99 @@ function GetTitles(bookProperty) {
     }
     return foundTitles;
 }
-var hermansBooks = GetTitles(false);
-hermansBooks.forEach(function (val) { return console.log("the result", val); });
-var poertryBooks = GetBookTitlesByCategory(enum_1.Category.Biology);
-poertryBooks.forEach(function (val, idx, arr) { return console.log(++idx + ' - ' + val); });
+let hermansBooks = GetTitles(false);
+hermansBooks.forEach(val => console.log("the result", val));
+const poertryBooks = GetBookTitlesByCategory(enum_1.Category.Biology);
+poertryBooks.forEach((val, idx, arr) => console.log(++idx + ' - ' + val));
 function PrintBook(book) {
     console.log(book.title + ' by ' + book.author);
 }
-var myBook = {
+let myBook = {
     id: 5,
     title: 'Nice Book',
     author: 'Steven Victor',
     available: true,
     category: enum_1.Category.Biology,
-    markDamage: function (reason) { return console.log('Damaged: ' + reason); },
-    markReturn: function (reason) { return console.log('Returned ' + reason); }
+    markDamage: (reason) => console.log('Damaged: ' + reason),
+    markReturn: (reason) => console.log('Returned ' + reason)
 };
 PrintBook(myBook);
 myBook.markDamage('missing book cover');
 myBook.markReturn('Not the book looking for');
-var fav = new classes_2.UniversityLib();
+let fav = new classes_2.UniversityLib();
 fav.name = 'Mark';
 fav.assistCustomer('Lynda');
-var Newspaper = (function (_super) {
-    __extends(class_1, _super);
-    function class_1() {
-        return _super !== null && _super.apply(this, arguments) || this;
+let Newspaper = class extends classes_1.ReferenceItem {
+    printCitation() {
+        console.log(`Newspaper: ${this.title}`);
     }
-    class_1.prototype.printCitation = function () {
-        console.log("Newspaper: " + this.title);
-    };
-    return class_1;
-}(classes_1.ReferenceItem));
-var myPaper = new Newspaper('The paper', 190);
+};
+let myPaper = new Newspaper('The paper', 190);
 myPaper.printCitation();
 function LogAndReturn(thing) {
     return thing;
 }
-var someString = LogAndReturn('hello this is the generic');
+let someString = LogAndReturn('hello this is the generic');
 console.log(someString);
-var inventory = [
+let inventory = [
     { id: 1, title: 'Book1', author: 'Steven Mark', available: true, category: enum_1.Category.Biology },
     { id: 2, title: 'Book2', author: 'Grandy', available: true, category: enum_1.Category.Biology },
     { id: 3, title: 'Book3', author: 'Mensa', available: false, category: enum_1.Category.Biology }
 ];
-var bookShelf = new shelf_1.default();
-inventory.forEach(function (book) { return bookShelf.add(book); });
-var firstBook = bookShelf.getFirst();
+let bookShelf = new shelf_1.default();
+inventory.forEach(book => bookShelf.add(book));
+let firstBook = bookShelf.getFirst();
 console.log("the new shelf: ", firstBook);
-var magazines = [
+let magazines = [
     { title: 'Programming Language', publisher: 'Code Maga' },
     { title: 'Five Points', publisher: 'GSU' },
 ];
-var magaShelf = new shelf_1.default();
-magazines.forEach(function (mag) { return magaShelf.add(mag); });
-var firstMag = magaShelf.getFirst();
+let magaShelf = new shelf_1.default();
+magazines.forEach(mag => magaShelf.add(mag));
+let firstMag = magaShelf.getFirst();
 console.log("the first mag: ", firstMag);
 magaShelf.printTitles();
-var softwareBook = bookShelf.find('Book1');
-console.log(softwareBook.title + " (" + softwareBook.author + ")");
+let softwareBook = bookShelf.find('Book1');
+console.log(`${softwareBook.title} (${softwareBook.author})`);
 function printBookInfo(item) {
-    console.log(item.title + " was authored by " + item.author);
+    console.log(`${item.title} was authored by ${item.author}`);
 }
-function LogFavBooks(_a) {
-    var book1 = _a[0], book2 = _a[1], others = _a.slice(2);
+function LogFavBooks([book1, book2, ...others]) {
     printBookInfo(book1);
     console.log(others);
 }
 LogFavBooks(GetAllBooks());
-function people() {
-    var inputs = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        inputs[_i] = arguments[_i];
-    }
+function people(...inputs) {
     return inputs;
 }
-var sample = [
+let sample = [
     { title: 'Mark', age: 24 },
     { title: 'Ade', age: 30 }
 ];
-var thePeople = people.apply(void 0, sample);
-var thePeopleNoSpread = people({ title: 'Mark', age: 24 }, { title: 'Ade', age: 30 });
+let thePeople = people(...sample);
+let thePeopleNoSpread = people({ title: 'Mark', age: 24 }, { title: 'Ade', age: 30 });
 console.log(thePeople);
 console.log(thePeopleNoSpread);
-var book1 = { id: 1, title: 'Book3', author: 'Mensa', available: false, category: enum_1.Category.Biology };
-var book2 = { id: 2, title: 'Book3', author: 'Mensa', available: false, category: enum_1.Category.Biology };
-var book3 = { id: 3, title: 'Book3', author: 'Mensa', available: false, category: enum_1.Category.Biology };
-var catalogLocation = ['A string', book1];
+let book1 = { id: 1, title: 'Book3', author: 'Mensa', available: false, category: enum_1.Category.Biology };
+let book2 = { id: 2, title: 'Book3', author: 'Mensa', available: false, category: enum_1.Category.Biology };
+let book3 = { id: 3, title: 'Book3', author: 'Mensa', available: false, category: enum_1.Category.Biology };
+let catalogLocation = ['A string', book1];
 console.log("the cat: ", catalogLocation);
-var many = [
+let many = [
     ['A string first', book1],
     ['A string second', book2],
     ['A string third', book3]
 ];
-var catalogLocations = many;
+let catalogLocations = many;
 console.log("the cats: ", catalogLocations);
-var allBooks = GetAllBooks();
-var allMagazines = GetAllMagazines();
-var readingMaterial = allBooks[0];
+let allBooks = GetAllBooks();
+let allMagazines = GetAllMagazines();
+let readingMaterial = allBooks[0];
 function PrintTitle(item) {
     console.log(item.title);
 }
 PrintTitle(allBooks[0]);
-var serialNovel = {
+let serialNovel = {
     id: 100,
     category: enum_1.Category.Biology,
     title: "The title",
@@ -230,27 +206,25 @@ var serialNovel = {
 };
 console.log('the serial: ', serialNovel);
 function applyMixins(derivedCtor, baseCtors) {
-    baseCtors.forEach(function (baseCtors) {
-        Object.getOwnPropertyNames(baseCtors.prototype).forEach(function (name) {
+    baseCtors.forEach(baseCtors => {
+        Object.getOwnPropertyNames(baseCtors.prototype).forEach(name => {
             derivedCtor.prototype[name] = baseCtors.prototype[name];
         });
     });
 }
 applyMixins(classes_2.UniversityLib, [classes_1.Employee, classes_1.Researcher]);
-var newLibrarian = new classes_2.UniversityLib();
+let newLibrarian = new classes_2.UniversityLib();
 newLibrarian.doResearch('Economics');
-var empCat = 'Manager';
+let empCat = 'Manager';
 console.log(empCat);
 function GetMaga(freq) {
 }
-var LibraryBook = (function () {
-    function LibraryBook() {
-    }
-    LibraryBook.prototype.Checkout = function () {
+class LibraryBook {
+    Checkout() {
         console.log('checking out a book');
         return this;
-    };
-    LibraryBook.prototype.Checkin = function () {
+    }
+    Checkin() {
         if (this instanceof ChildrensBook) {
             console.log('Checking in a ChildrensBook');
         }
@@ -258,36 +232,25 @@ var LibraryBook = (function () {
             console.log('Checking in a ElectronicBook');
         }
         return this;
-    };
-    return LibraryBook;
-}());
-var ChildrensBook = (function (_super) {
-    __extends(ChildrensBook, _super);
-    function ChildrensBook() {
-        return _super !== null && _super.apply(this, arguments) || this;
     }
-    ChildrensBook.prototype.Clean = function () {
+}
+class ChildrensBook extends LibraryBook {
+    Clean() {
         console.log('Cleaning a book');
         return this;
-    };
-    return ChildrensBook;
-}(LibraryBook));
-var ElectronicBook = (function (_super) {
-    __extends(ElectronicBook, _super);
-    function ElectronicBook() {
-        return _super !== null && _super.apply(this, arguments) || this;
     }
-    ElectronicBook.prototype.RemoveFromCustomerDevice = function () {
+}
+class ElectronicBook extends LibraryBook {
+    RemoveFromCustomerDevice() {
         console.log('Removing from device');
         return this;
-    };
-    return ElectronicBook;
-}(LibraryBook));
-var kidBook = new ChildrensBook();
+    }
+}
+let kidBook = new ChildrensBook();
 kidBook.Checkin()
     .Clean()
     .Checkout();
-var ebook = new ElectronicBook();
+let ebook = new ElectronicBook();
 ebook.Checkin()
     .RemoveFromCustomerDevice()
     .Checkout();
@@ -295,7 +258,7 @@ function isVehicle(v) {
     return v.numberOfWheels !== undefined;
 }
 console.log(isVehicle('hello'));
-var lib = new classes_1.PublicLibrarian();
+let lib = new classes_1.PublicLibrarian();
 if (lib instanceof classes_2.UniversityLib) {
     lib.assistFaculty('The faculty');
 }
@@ -305,16 +268,16 @@ if (lib instanceof classes_1.PublicLibrarian) {
 function isBook(text) {
     return text.author !== undefined;
 }
-var readingMat = GetAllBooks()[0];
+let readingMat = GetAllBooks()[0];
 if (isBook(readingMat)) {
-    console.log("The book's author is " + readingMat.author);
+    console.log(`The book's author is ${readingMat.author}`);
 }
 else {
-    console.log("The magazine's publisher is " + readingMat);
+    console.log(`The magazine's publisher is ${readingMat}`);
 }
-var libraryCustomer = {
+let libraryCustomer = {
     name: 'thorne',
-    assistCustomer: function (customer) { return console.log("the name " + customer); }
+    assistCustomer: (customer) => console.log(`the name ${customer}`)
 };
 if (libraryCustomer instanceof classes_2.UniversityLib) {
     console.log('A helpful librarian');
@@ -322,13 +285,88 @@ if (libraryCustomer instanceof classes_2.UniversityLib) {
 else {
     console.log('Not a librarian');
 }
-var lib1 = new classes_2.UniversityLib();
-var lib2 = new classes_1.PublicLibrarian();
+let lib1 = new classes_2.UniversityLib();
+let lib2 = new classes_1.PublicLibrarian();
 try {
-    lib1.assistFaculty = function () { return console.log('assistFaculty replacement method'); };
-    lib2.teachCommunity = function () { return console.log('teachCommunity replacement method'); };
+    lib1.assistFaculty = () => console.log('assistFaculty replacement method');
+    lib2.teachCommunity = () => console.log('teachCommunity replacement method');
 }
 catch (error) {
     console.log("the error: ", error);
 }
+function getBooksByCategory(cat, callback) {
+    setTimeout(() => {
+        try {
+            let foundBooks = GetBookTitlesByCategory(cat);
+            if (foundBooks.length > 0) {
+                callback(null, foundBooks);
+            }
+            else {
+                throw new Error('no books found');
+            }
+        }
+        catch (error) {
+            callback(error, null);
+        }
+    }, 2000);
+}
+function logCategorySearch(err, titles) {
+    if (err) {
+        console.log(`Error message: ${err.message}`);
+    }
+    else {
+        console.log(`Found the following titles: ${titles}`);
+    }
+}
+console.log('Beginning search...');
+getBooksByCategory(enum_1.Category.Biology, logCategorySearch);
+console.log('Search submitted...');
+function getBooksByCategory2(cat) {
+    let ans = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            try {
+                let foundBooks = GetBookTitlesByCategory(cat);
+                if (foundBooks.length > 0) {
+                    resolve(foundBooks);
+                }
+                else {
+                    throw new Error('no books found');
+                }
+            }
+            catch (error) {
+                reject(error);
+            }
+        }, 2000);
+    });
+    return ans;
+}
+console.log('Beginning search 2...');
+getBooksByCategory2(enum_1.Category.Biology).then(results => {
+    return results;
+}).then(results => console.log(results.length))
+    .catch(err => {
+    console.log(err);
+});
+console.log('Search submitted 2...');
+function getBooksByCategory3(cat) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            let foundBooks = yield GetBookTitlesByCategory(cat);
+            if (foundBooks.length > 0) {
+                return foundBooks;
+            }
+            else {
+                throw new Error('no books found');
+            }
+        }
+        catch (error) {
+            return error;
+        }
+    });
+}
+console.log('Beginning search 3...');
+getBooksByCategory3(enum_1.Category.Biology).then(ans => {
+    console.log('third ans: ', ans);
+}).catch(err => console.log('third error: ', err));
+console.log('Search submitted 3...');
 //# sourceMappingURL=app.js.map

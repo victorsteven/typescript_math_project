@@ -1,17 +1,4 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -19,93 +6,73 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var decorator_1 = require("./decorator");
-var UniversityLib = (function () {
-    function UniversityLib() {
-    }
-    UniversityLib.prototype.assistCustomer = function (name) {
+const decorator_1 = require("./decorator");
+class UniversityLib {
+    assistCustomer(name) {
         console.log("this is the person name: " + name);
-    };
-    UniversityLib.prototype.assistFaculty = function (custName) {
+    }
+    assistFaculty(custName) {
         console.log('Assisting faculty');
-    };
-    __decorate([
-        decorator_1.writable(true)
-    ], UniversityLib.prototype, "assistFaculty", null);
-    return UniversityLib;
-}());
-exports.UniversityLib = UniversityLib;
-var PublicLibrarian = (function () {
-    function PublicLibrarian() {
     }
-    PublicLibrarian.prototype.assistCustomer = function (name) {
+}
+__decorate([
+    decorator_1.writable(true)
+], UniversityLib.prototype, "assistFaculty", null);
+exports.UniversityLib = UniversityLib;
+class PublicLibrarian {
+    assistCustomer(name) {
         console.log("this is the person name: " + name);
-    };
-    PublicLibrarian.prototype.teachCommunity = function () {
+    }
+    teachCommunity() {
         console.log('Assisting community');
-    };
-    __decorate([
-        decorator_1.writable(false)
-    ], PublicLibrarian.prototype, "teachCommunity", null);
-    return PublicLibrarian;
-}());
+    }
+}
+__decorate([
+    decorator_1.writable(false)
+], PublicLibrarian.prototype, "teachCommunity", null);
 exports.PublicLibrarian = PublicLibrarian;
-var ReferenceItem = (function () {
-    function ReferenceItem(title, year) {
+class ReferenceItem {
+    constructor(title, year) {
         this.title = title;
         this.year = year;
         console.log('Creating a new ReferenceItem..');
     }
-    ReferenceItem.prototype.printItem = function () {
-        console.log(this.title + " was published in " + this.year);
-        console.log("Department: " + ReferenceItem.department);
-    };
-    Object.defineProperty(ReferenceItem.prototype, "publisher", {
-        get: function () {
-            return this._publisher.toUpperCase();
-        },
-        set: function (newPublisher) {
-            this._publisher = newPublisher;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ReferenceItem.department = 'Research';
-    return ReferenceItem;
-}());
+    printItem() {
+        console.log(`${this.title} was published in ${this.year}`);
+        console.log(`Department: ${ReferenceItem.department}`);
+    }
+    get publisher() {
+        return this._publisher.toUpperCase();
+    }
+    set publisher(newPublisher) {
+        this._publisher = newPublisher;
+    }
+}
 exports.ReferenceItem = ReferenceItem;
-var Encyclopedia = (function (_super) {
-    __extends(Encyclopedia, _super);
-    function Encyclopedia(newTitle, newYear, pages) {
-        var _this = _super.call(this, newTitle, newYear) || this;
-        _this.pages = pages;
-        return _this;
+ReferenceItem.department = 'Research';
+class Encyclopedia extends ReferenceItem {
+    constructor(newTitle, newYear, pages) {
+        super(newTitle, newYear);
+        this.pages = pages;
     }
-    Encyclopedia.prototype.printCitation = function () {
-        console.log("details: " + this.title + " and the year: " + this.year);
-    };
-    return Encyclopedia;
-}(ReferenceItem));
+    printCitation() {
+        console.log(`details: ${this.title} and the year: ${this.year}`);
+    }
+}
 exports.Encyclopedia = Encyclopedia;
-var Employee = (function () {
-    function Employee() {
-    }
-    Employee.prototype.addToSchedule = function () {
+class Employee {
+    addToSchedule() {
         console.log('Employee added to schedule');
-    };
-    Employee.prototype.logTitle = function () {
-        console.log("Employee has the title " + this.title);
-    };
-    return Employee;
-}());
-exports.Employee = Employee;
-var Researcher = (function () {
-    function Researcher() {
     }
-    Researcher.prototype.doResearch = function (topic) {
-        console.log("Doing research on " + topic);
-    };
-    return Researcher;
-}());
+    logTitle() {
+        console.log(`Employee has the title ${this.title}`);
+    }
+}
+exports.Employee = Employee;
+class Researcher {
+    doResearch(topic) {
+        console.log(`Doing research on ${topic}`);
+    }
+}
 exports.Researcher = Researcher;
 //# sourceMappingURL=classes.js.map
