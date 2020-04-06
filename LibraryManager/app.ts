@@ -474,3 +474,11 @@ if (libraryCustomer instanceof UniversityLib) {
 }
 
 let lib1 = new UniversityLib();
+let lib2 = new PublicLibrarian();
+
+try {
+  lib1.assistFaculty = () => console.log('assistFaculty replacement method')
+  lib2.teachCommunity = () => console.log('teachCommunity replacement method')
+} catch(error) {
+  console.log("the error: ", error)
+}

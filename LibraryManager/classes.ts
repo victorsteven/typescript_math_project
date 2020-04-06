@@ -1,9 +1,10 @@
 import { Book, DamageLogger, Author, Librarian } from './interfaces'
-import { sealed } from './decorator'
+import { sealed, logger, writable } from './decorator'
 
 // export const CLASS_INFO = Symbol()
 
-@sealed('HelloString')
+// @logger
+// @sealed('HelloString')
 export class UniversityLib implements Librarian, Employee, Researcher {
 
   name: string
@@ -21,6 +22,7 @@ export class UniversityLib implements Librarian, Employee, Researcher {
   assistCustomer(name: string) {
     console.log("this is the person name: " + name)
   } 
+  @writable(true) //the method may be changed
   assistFaculty(custName: string) {
     console.log('Assisting faculty')
   }
@@ -32,6 +34,7 @@ export class UniversityLib implements Librarian, Employee, Researcher {
   doResearch: (topic: string) => void
 }
 
+// @logger
 export class PublicLibrarian implements Librarian {
 
   name: string
@@ -41,6 +44,7 @@ export class PublicLibrarian implements Librarian {
   assistCustomer(name: string) {
     console.log("this is the person name: " + name)
   }
+  @writable(false)
   teachCommunity() {
     console.log('Assisting community')
   }

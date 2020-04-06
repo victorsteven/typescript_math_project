@@ -29,9 +29,9 @@ var UniversityLib = (function () {
     UniversityLib.prototype.assistFaculty = function (custName) {
         console.log('Assisting faculty');
     };
-    UniversityLib = __decorate([
-        decorator_1.sealed('HelloString')
-    ], UniversityLib);
+    __decorate([
+        decorator_1.writable(true)
+    ], UniversityLib.prototype, "assistFaculty", null);
     return UniversityLib;
 }());
 exports.UniversityLib = UniversityLib;
@@ -44,6 +44,9 @@ var PublicLibrarian = (function () {
     PublicLibrarian.prototype.teachCommunity = function () {
         console.log('Assisting community');
     };
+    __decorate([
+        decorator_1.writable(false)
+    ], PublicLibrarian.prototype, "teachCommunity", null);
     return PublicLibrarian;
 }());
 exports.PublicLibrarian = PublicLibrarian;

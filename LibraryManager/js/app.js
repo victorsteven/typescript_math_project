@@ -323,4 +323,12 @@ else {
     console.log('Not a librarian');
 }
 var lib1 = new classes_2.UniversityLib();
+var lib2 = new classes_1.PublicLibrarian();
+try {
+    lib1.assistFaculty = function () { return console.log('assistFaculty replacement method'); };
+    lib2.teachCommunity = function () { return console.log('teachCommunity replacement method'); };
+}
+catch (error) {
+    console.log("the error: ", error);
+}
 //# sourceMappingURL=app.js.map
